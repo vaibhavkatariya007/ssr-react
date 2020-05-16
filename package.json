@@ -1,40 +1,41 @@
 {
-  "name": "hacker-news-clone",
+  "name": "sr-react",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage": "./",
   "dependencies": {
-    "@babel/preset-env": "^7.9.6",
-    "@babel/preset-react": "^7.9.4",
-    "@babel/register": "^7.9.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "express": "^4.17.1",
+    "@babel/register": "^7.0.0",
+    "babel-plugin-dynamic-import-node": "^2.0.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "express": "^4.16.2",
+    "file-loader": "^2.0.0",
     "ignore-styles": "^5.0.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-helmet": "^5.2.0",
+    "react-loadable": "^5.3.1",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.1",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "url-loader": "^1.0.1"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "ssr": "node server/index.js"
+    "server": "node server/bootstrap.js"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

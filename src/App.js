@@ -1,26 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Loadable from 'react-loadable';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import { Route, Switch, NavLink } from 'react-router-dom';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+const AsyncPageDefault = Loadable({
+  loader: () => import(/* webpackChunkName: "pageDefault" */ './PageDefault'),
+  loading: () => <div>loading page...</div>,
+  modules: ['pageDefault'],
+});
+
+const AsyncPageAnother = Loadable({
+  loader: () => import(/* webpackChunkName: "pageAnother" */ './PageAnother'),
+  loading: () => <div>loading another page...</div>,
+  modules: ['pageAnother'],
+});
+
+class App extends Component {
+  /// here i can do localstorage stuff
+  render() {
+    return (
+      <div className="App">
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          {this.props.data &&
+            this.props.data.hits.length > 0 &&
+            this.props.data.hits.map((hit) => <div>{hit.title}</div>)}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+        <hr />
+
+        <h2>Part 3: React router</h2>
+        <nav>
+          <NavLink to="/" exact activeClassName="active">
+            Home
+          </NavLink>
+          <NavLink to="/another" activeClassName="active">
+            Another page
+          </NavLink>
+        </nav>
+        <Switch>
+          <Route path="/" exact component={AsyncPageDefault} />
+          <Route path="/another" component={AsyncPageAnother} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default withRouter(
+  connect(({ app }) => ({
+    data: app.newsData,
+  }))(App)
+);
