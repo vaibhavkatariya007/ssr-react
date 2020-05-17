@@ -7,7 +7,7 @@ import { Frontload } from 'react-frontload';
 
 import ServerApp from './ServerApp';
 import configureStore from './store/configureStore';
-import registerServiceWorker from './registerServiceWorker';
+//import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 import 'antd/dist/antd.css';
@@ -30,4 +30,4 @@ window.onload = () => {
   });
 };
 
-registerServiceWorker();
+// registerServiceWorker();

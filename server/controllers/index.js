@@ -31,14 +31,14 @@ const actionIndex = (req, res, next) => {
 
 // root (/) should always serve our server rendered page
 router.use('^/$', actionIndex);
-router.get('/:id', actionIndex);
-
 // other static resources should just be served as they are
 router.use(
-  express.static(path.resolve(__dirname, '../../build'), {
+  express.static(path.resolve(__dirname, '..', '..', 'build'), {
     maxAge: '30d',
   })
 );
+
+router.get('/:id', actionIndex);
 
 // any other route should be handled by react-router, so serve the index page
 router.use('*', actionIndex);
