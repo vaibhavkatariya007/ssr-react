@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
+import Loadable from 'react-loadable';
 import { Table, Spin, Button } from 'antd';
 import moment from 'moment';
 import { CaretUpOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import LineGraph from './Graph';
+// import LineGraph from './Graph';
+
+import { setNewsData } from './store/appReducer';
 
 import './App.css';
+
+const AsyncGraph = Loadable({
+  loader: () => import(/* webpackChunkName: "graph" */ './Graph/index'),
+  loading: () => <div>loading...</div>,
+  modules: ['graph'],
+});
 
 const TIMELINE_DATA = {
   labels: [],
@@ -43,7 +52,6 @@ class App extends Component {
       if (votesData[dataID]) {
         newCount = parseInt(votesData[dataID]) + 1;
       }
-
       this.setState(
         {
           ...this.state,
@@ -98,14 +106,30 @@ class App extends Component {
     }
   }
 
+  getData = (pageNo) => {
+    const { history, updateNews } = this.props;
+    fetch(
+      `https://hn.algolia.com/api/v1/search${pageNo ? '?page=' + pageNo : '/'}`
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        updateNews(result);
+        history.push(`/${pageNo || ''}`);
+      })
+      .catch((err) => console.log(err));
+    //window.open(`http://localhost:3000/${pageNo || ''}`, '_self');
+  };
+
   prevPage = () => {
     const { page = 0 } = this.props.data;
     const nPage = page - 1;
-    window.open(`http://localhost:3000/${nPage || ''}`, '_self');
+    this.getData(nPage);
   };
+
   nextPage = () => {
     const { page = 0 } = this.props.data;
-    window.open(`http://localhost:3000/${page + 1}`, '_self');
+    const nPage = page + 1;
+    this.getData(nPage);
   };
 
   render() {
@@ -194,7 +218,7 @@ class App extends Component {
 
     return (
       <center>
-        <div className="App">
+        <div className="app">
           <Table columns={columns} dataSource={newsData} pagination={false} />
           <div className="custom-pagination">
             <Button type="primary" onClick={this.prevPage} disabled={!page}>
@@ -205,7 +229,7 @@ class App extends Component {
               Next
             </Button>
           </div>
-          <LineGraph data={GRAPH_DATA} />
+          <AsyncGraph data={GRAPH_DATA} />
           {/* {(hideData && votesData && (
             <>
               <Table
@@ -223,7 +247,12 @@ class App extends Component {
 }
 
 export default withRouter(
-  connect(({ app }) => ({
-    data: app.newsData,
-  }))(App)
+  connect(
+    ({ app }) => ({
+      data: app.newsData,
+    }),
+    (dispatch) => ({
+      updateNews: (data) => dispatch(setNewsData(data)),
+    })
+  )(App)
 );

@@ -27,6 +27,7 @@ const actionIndex = (req, res, next) => {
 };
 
 // root (/) should always serve our server rendered page
+//router.use('^/$', actionIndex);
 router.get('/', actionIndex);
 router.get('/:id', actionIndex);
 //router.use('*', actionIndex);
@@ -39,6 +40,8 @@ router.use(
 );
 
 // any other route should be handled by react-router, so serve the index page
-router.use('*', actionIndex);
+//router.use('*', actionIndex);
+// router.get('/', actionIndex);
+// router.get('/:id', actionIndex);
 
 export default router;

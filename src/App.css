@@ -1,5 +1,5 @@
 /*=======Hacker news styling======*/
-.App {
+.app {
   width: 80%;
   font-family: Verdana, Geneva, sans-serif;
   color: rgb(130, 130, 130);
@@ -97,7 +97,7 @@ span.hide-action {
 }
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-  .App {
+  .app {
     width: 100%;
   }
   .news-title-block,
