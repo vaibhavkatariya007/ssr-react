@@ -1,50 +1,191 @@
 import React, { Component } from 'react';
-import Loadable from 'react-loadable';
+import { Table, Spin } from 'antd';
+import moment from 'moment';
+import { CaretUpOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import LineGraph from './Graph';
 
 import './App.css';
 
-const AsyncPageDefault = Loadable({
-  loader: () => import(/* webpackChunkName: "pageDefault" */ './PageDefault'),
-  loading: () => <div>loading page...</div>,
-  modules: ['pageDefault'],
-});
-
-const AsyncPageAnother = Loadable({
-  loader: () => import(/* webpackChunkName: "pageAnother" */ './PageAnother'),
-  loading: () => <div>loading another page...</div>,
-  modules: ['pageAnother'],
-});
+const TIMELINE_DATA = {
+  labels: ['#1224', '#1225', '#1226', '#1227'],
+  datasets: [
+    {
+      key: 'Votes',
+      label: 'Votes',
+      data: [11, 20, 4, 44],
+      borderColor: '#6495ED',
+      backgroundColor: '#6495ED',
+      pointHoverBackgroundColor: '#6495ED',
+    },
+  ],
+};
 
 class App extends Component {
-  /// here i can do localstorage stuff
+  state = {};
+  upVote = (dataID) => {
+    if (dataID) {
+      console.log('UPVOTE data Id:', dataID);
+      const { votesData = {} } = this.state;
+      let newCount = 1;
+      if (votesData[dataID]) {
+        newCount = parseInt(votesData[dataID]) + 1;
+      }
+
+      this.setState(
+        {
+          ...this.state,
+          votesData: {
+            ...votesData,
+            [dataID]: newCount,
+          },
+        },
+        () => {
+          if (window && window.localStorage) {
+            localStorage.setItem(
+              'votesData',
+              JSON.stringify(this.state.votesData)
+            );
+          }
+        }
+      );
+    }
+  };
+
+  hideNews = (dataID) => {
+    if (dataID) {
+      const { hideData = {} } = this.state;
+      console.log('HIDE data Id:', dataID);
+      this.setState(
+        {
+          ...this.state,
+          hideData: {
+            ...hideData,
+            [dataID]: true,
+          },
+        },
+        () => {
+          if (window && window.localStorage) {
+            localStorage.setItem(
+              'hideData',
+              JSON.stringify(this.state.hideData)
+            );
+          }
+        }
+      );
+    }
+  };
+
+  componentDidMount() {
+    if (window && window.localStorage) {
+      const hideData = localStorage.getItem('hideData');
+      const votesData = localStorage.getItem('votesData');
+      this.setState({
+        hideData: (hideData && JSON.parse(hideData)) || {},
+        votesData: (votesData && JSON.parse(votesData)) || {},
+      });
+    }
+  }
+
   render() {
+    const { hideData, votesData } = this.state;
+    const columns = [
+      {
+        title: 'comments',
+        dataIndex: 'num_comments',
+        width: '30px',
+        key: 'comments',
+        className: 'comments',
+      },
+      {
+        title: 'Vote Count',
+        key: 'voteCount',
+        dataIndex: 'votes',
+        width: '30px',
+        className: 'voteCount',
+      },
+      {
+        title: 'UpVote',
+        key: 'votes',
+        width: '20px',
+        className: 'upVote',
+        render: (data) => (
+          <CaretUpOutlined
+            className="upvoteAction"
+            onClick={() => this.upVote(data.objectID)}
+          />
+        ),
+      },
+      {
+        title: 'New Details',
+        key: 'news_details',
+        render: (data, index) => (
+          <div key={`news-${index}`} className="news-title-block">
+            {(data.url && (
+              <a href={data.url} target="_blank">
+                {data.title}
+              </a>
+            )) || <span>{data.title}</span>}
+            <span className="createdOn">
+              | posted on: (
+              {moment(data.created_at).format('MMMM Do YYYY, h:mm:ss a')})
+            </span>
+            <div className="more-info-n-action">
+              {data.author && (
+                <span className="author">by {data.author} |</span>
+              )}
+              {data.points && (
+                <span className="points">{data.points} points | </span>
+              )}
+              <span
+                onClick={() => this.hideNews(data.objectID)}
+                className="hide-action"
+              >
+                [ hide ]
+              </span>
+            </div>
+          </div>
+        ),
+      },
+    ];
+    let newsData = this.props.data && this.props.data.hits;
+    if (hideData && Object.keys(hideData).length) {
+      newsData = newsData.filter((news) => {
+        if (news && !hideData[news.objectID]) {
+          return news;
+        }
+      });
+    }
+
+    if (newsData && newsData.length) {
+      newsData = newsData.map((news) => {
+        if (news && votesData && votesData[news.objectID]) {
+          return Object.assign(news, { votes: votesData[news.objectID] });
+        }
+        return Object.assign(news, { votes: 0 });
+      });
+    }
+
+    console.log('News Data', newsData);
+
+    console.log('STATEDATA::', this.state);
+
     return (
-      <div className="App">
-        <p>
-          {this.props.data &&
-            this.props.data.hits.length > 0 &&
-            this.props.data.hits.map((hit) => <div>{hit.title}</div>)}
-        </p>
-
-        <hr />
-
-        <h2>Part 3: React router</h2>
-        <nav>
-          <NavLink to="/" exact activeClassName="active">
-            Home
-          </NavLink>
-          <NavLink to="/another" activeClassName="active">
-            Another page
-          </NavLink>
-        </nav>
-        <Switch>
-          <Route path="/" exact component={AsyncPageDefault} />
-          <Route path="/another" component={AsyncPageAnother} />
-        </Switch>
-      </div>
+      <center>
+        <div className="App">
+          {(hideData && votesData && (
+            <>
+              <Table
+                columns={columns}
+                dataSource={newsData}
+                pagination={{ pageSize: 20 }}
+              />
+              <LineGraph data={TIMELINE_DATA} />}
+            </>
+          )) || <Spin tip="Loading..." />}
+        </div>
+      </center>
     );
   }
 }

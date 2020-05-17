@@ -1,0 +1,13 @@
+/*** -----------------------------------------
+
+              TIMELINE CHART
+
+----------------------------------------- ***/
+
+.timeline-chart {
+  margin-top: 35px;
+}
+
+.timeline-chart .chartjs-render-monitor {
+  height: 350px !important;
+}
