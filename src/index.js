@@ -8,7 +8,7 @@ import './index.css';
 import 'antd/dist/antd.css';
 import App from './App';
 import configureStore from './store/configureStore';
-// import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from './registerServiceWorker';
 
 const store = configureStore(window.__REDUX_STATE__ || {});
 
@@ -26,4 +26,4 @@ window.onload = () => {
   });
 };
 
-// registerServiceWorker();
+registerServiceWorker();

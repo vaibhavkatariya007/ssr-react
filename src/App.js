@@ -190,6 +190,7 @@ class App extends Component {
                 pagination={{ pageSize: 20 }}
               />
               <LineGraph data={GRAPH_DATA} />
+              <div style={{ textAlign: 'center', padding: '5px' }}>ID</div>
             </>
           )) || <Spin tip="Loading..." />}
         </div>
