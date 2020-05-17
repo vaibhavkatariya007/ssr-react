@@ -5,14 +5,13 @@ import moment from 'moment';
 import { CaretUpOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-// import LineGraph from './Graph';
+
+import { Page } from './core';
 
 import { setNewsData } from './store/appReducer';
 
-import './App.css';
-
 const AsyncGraph = Loadable({
-  loader: () => import(/* webpackChunkName: "graph" */ './Graph/index'),
+  loader: () => import(/* webpackChunkName: "graph" */ './core/Graph/index'),
   loading: () => <div>loading...</div>,
   modules: ['graph'],
 });
@@ -108,6 +107,7 @@ class App extends Component {
 
   getData = (pageNo) => {
     const { history, updateNews } = this.props;
+    history.push(`/${pageNo || ''}`);
     fetch(
       `https://hn.algolia.com/api/v1/search${pageNo ? '?page=' + pageNo : '/'}`
     )
@@ -121,20 +121,20 @@ class App extends Component {
   };
 
   prevPage = () => {
-    const { page = 0 } = this.props.data;
+    const { data: { page = 0 } = {} } = this.props;
     const nPage = page - 1;
     this.getData(nPage);
   };
 
   nextPage = () => {
-    const { page = 0 } = this.props.data;
+    const { data: { page = 0 } = {} } = this.props;
     const nPage = page + 1;
     this.getData(nPage);
   };
 
   render() {
     const { hideData, votesData } = this.state;
-    const { page = 0, nbPages = 0, hits = [] } = this.props.data;
+    const { data: { page = 0, nbPages = 0, hits = [] } = {} } = this.props;
     const columns = [
       {
         title: 'comments',
@@ -217,20 +217,25 @@ class App extends Component {
     const GRAPH_DATA = calculateTimeLineData(newsData, votesData);
 
     return (
-      <center>
-        <div className="app">
-          <Table columns={columns} dataSource={newsData} pagination={false} />
-          <div className="custom-pagination">
-            <Button type="primary" onClick={this.prevPage} disabled={!page}>
-              Previous
-            </Button>
-            |
-            <Button type="primary" onClick={this.nextPage} disabled={!nbPages}>
-              Next
-            </Button>
-          </div>
-          <AsyncGraph data={GRAPH_DATA} />
-          {/* {(hideData && votesData && (
+      <Page>
+        <center>
+          <div className="app">
+            <Table columns={columns} dataSource={newsData} pagination={false} />
+            <div className="custom-pagination">
+              <Button type="primary" onClick={this.prevPage} disabled={!page}>
+                Previous
+              </Button>
+              |
+              <Button
+                type="primary"
+                onClick={this.nextPage}
+                disabled={!nbPages}
+              >
+                Next
+              </Button>
+            </div>
+            <AsyncGraph data={GRAPH_DATA} />
+            {/* {(hideData && votesData && (
             <>
               <Table
                 columns={columns}
@@ -240,8 +245,9 @@ class App extends Component {
               <LineGraph data={GRAPH_DATA} />
             </>
           )) || <Spin tip="Loading..." />} */}
-        </div>
-      </center>
+          </div>
+        </center>
+      </Page>
     );
   }
 }

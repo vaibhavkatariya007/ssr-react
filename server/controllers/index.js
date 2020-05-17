@@ -9,12 +9,15 @@ const router = express.Router();
 const path = require('path');
 
 const actionIndex = (req, res, next) => {
-  console.log('PARAMS::', req.params);
-  const pageId = req.params.id;
+  let URL = req.headers.referer || req.params.id;
+  const ID = URL && URL.substring(URL.lastIndexOf('/')).replace('/', '');
+  const pageId = parseInt(ID);
   const store = configureStore();
   //tags=front_page
   fetch(
-    `https://hn.algolia.com/api/v1/search${pageId ? '?page=' + pageId : '/'}`
+    `https://hn.algolia.com/api/v1/search${
+      pageId && pageId !== NaN ? '?page=' + pageId : '/'
+    }`
   )
     .then((res) => res.json())
     .then((result) => {
@@ -27,21 +30,17 @@ const actionIndex = (req, res, next) => {
 };
 
 // root (/) should always serve our server rendered page
-//router.use('^/$', actionIndex);
-router.get('/', actionIndex);
+router.use('^/$', actionIndex);
 router.get('/:id', actionIndex);
-//router.use('*', actionIndex);
 
 // other static resources should just be served as they are
 router.use(
-  express.static(path.resolve(__dirname, '..', '..', 'build'), {
+  express.static(path.resolve(__dirname, '../../build'), {
     maxAge: '30d',
   })
 );
 
 // any other route should be handled by react-router, so serve the index page
-//router.use('*', actionIndex);
-// router.get('/', actionIndex);
-// router.get('/:id', actionIndex);
+router.use('*', actionIndex);
 
 export default router;

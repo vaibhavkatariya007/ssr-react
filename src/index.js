@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import Loadable from 'react-loadable';
 import { Provider as ReduxProvider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { Frontload } from 'react-frontload';
 
-import App from './App';
+import ServerApp from './ServerApp';
 import configureStore from './store/configureStore';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -16,7 +17,9 @@ const store = configureStore(window.__REDUX_STATE__ || {});
 const AppBundle = (
   <ReduxProvider store={store}>
     <BrowserRouter>
-      <App />
+      <Frontload noServerRender={true}>
+        <ServerApp />
+      </Frontload>
     </BrowserRouter>
   </ReduxProvider>
 );
