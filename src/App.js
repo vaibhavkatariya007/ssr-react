@@ -9,12 +9,12 @@ import LineGraph from './Graph';
 import './App.css';
 
 const TIMELINE_DATA = {
-  labels: ['#1224', '#1225', '#1226', '#1227'],
+  labels: [],
   datasets: [
     {
       key: 'Votes',
       label: 'Votes',
-      data: [11, 20, 4, 44],
+      data: [],
       borderColor: '#6495ED',
       backgroundColor: '#6495ED',
       pointHoverBackgroundColor: '#6495ED',
@@ -22,11 +22,22 @@ const TIMELINE_DATA = {
   ],
 };
 
+const calculateTimeLineData = (newsData, votesData) => {
+  if (newsData && votesData && newsData.length) {
+    TIMELINE_DATA.labels = [];
+    TIMELINE_DATA.datasets[0].data = [];
+    newsData.forEach((news) => {
+      TIMELINE_DATA.labels.push(news.objectID);
+      TIMELINE_DATA.datasets[0].data.push(votesData[news.objectID] || 0);
+    });
+  }
+  return TIMELINE_DATA;
+};
+
 class App extends Component {
   state = {};
   upVote = (dataID) => {
     if (dataID) {
-      console.log('UPVOTE data Id:', dataID);
       const { votesData = {} } = this.state;
       let newCount = 1;
       if (votesData[dataID]) {
@@ -56,7 +67,6 @@ class App extends Component {
   hideNews = (dataID) => {
     if (dataID) {
       const { hideData = {} } = this.state;
-      console.log('HIDE data Id:', dataID);
       this.setState(
         {
           ...this.state,
@@ -167,9 +177,7 @@ class App extends Component {
       });
     }
 
-    console.log('News Data', newsData);
-
-    console.log('STATEDATA::', this.state);
+    const GRAPH_DATA = calculateTimeLineData(newsData, votesData);
 
     return (
       <center>
@@ -181,7 +189,7 @@ class App extends Component {
                 dataSource={newsData}
                 pagination={{ pageSize: 20 }}
               />
-              <LineGraph data={TIMELINE_DATA} />}
+              <LineGraph data={GRAPH_DATA} />
             </>
           )) || <Spin tip="Loading..." />}
         </div>
