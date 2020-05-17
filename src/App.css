@@ -7,7 +7,8 @@
   border-bottom: 5px solid rgb(255, 102, 0);
 }
 .ant-table-wrapper {
-  border-bottom: 1px solid rgb(255, 102, 0);
+  border-bottom: 1px dashed rgb(255, 102, 0);
+  padding-bottom: 10px;
 }
 .ant-table-tbody > tr > td {
   background-color: #f6f6ef;
@@ -58,4 +59,58 @@ span.hide-action {
 }
 .news-title-block a:visited {
   color: rgb(130, 130, 130);
+}
+
+.custom-pagination {
+  text-align: right;
+  padding: 10px;
+  color: rgb(255, 102, 0);
+  border-bottom: 1px solid rgb(255, 102, 0);
+}
+.ant-btn-primary {
+  color: rgb(255, 102, 0);
+  margin-right: 5px;
+}
+.ant-btn-primary,
+.ant-btn-primary:focus,
+.ant-btn-primary.active,
+.ant-btn-primary:active {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  outline: none;
+  color: rgb(210, 90, 10);
+}
+.ant-btn-primary[disabled],
+.ant-btn-primary[disabled]:hover {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  outline: none;
+}
+.ant-btn-primary:hover {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  outline: none;
+  color: rgb(210, 90, 10);
+}
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .App {
+    width: 100%;
+  }
+  .news-title-block,
+  .ant-table-tbody > tr > td {
+    font-size: 8pt;
+  }
+  .news-title-block .more-info-n-action span {
+    font-size: 6pt;
+  }
+  .createdOn {
+    display: none;
+  }
+  .timeline-chart {
+    margin-top: 20px;
+  }
 }

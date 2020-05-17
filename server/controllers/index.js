@@ -9,9 +9,13 @@ const router = express.Router();
 const path = require('path');
 
 const actionIndex = (req, res, next) => {
+  console.log('PARAMS::', req.params);
+  const pageId = req.params.id;
   const store = configureStore();
-
-  fetch('https://hn.algolia.com/api/v1/search?tags=front_page')
+  //tags=front_page
+  fetch(
+    `https://hn.algolia.com/api/v1/search${pageId ? '?page=' + pageId : '/'}`
+  )
     .then((res) => res.json())
     .then((result) => {
       return store.dispatch(setNewsData(result));
@@ -23,7 +27,9 @@ const actionIndex = (req, res, next) => {
 };
 
 // root (/) should always serve our server rendered page
-router.use('^/$', actionIndex);
+router.get('/', actionIndex);
+router.get('/:id', actionIndex);
+//router.use('*', actionIndex);
 
 // other static resources should just be served as they are
 router.use(

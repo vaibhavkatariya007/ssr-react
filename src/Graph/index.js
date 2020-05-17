@@ -14,6 +14,7 @@ const Graph = ({ data }) => (
       height={350}
       options={{
         legend: {
+          display: false,
           position: 'left',
           labels: {
             boxWidth: 0,
@@ -24,10 +25,24 @@ const Graph = ({ data }) => (
         },
         maintainAspectRatio: false,
         scales: {
+          yAxes: [
+            {
+              barPercentage: 0.2,
+              maintainAspectRatio: false,
+              scaleLabel: {
+                display: true,
+                labelString: 'Votes',
+              },
+            },
+          ],
           xAxes: [
             {
               gridLines: {
                 display: false,
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'ID',
               },
             },
           ],

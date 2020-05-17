@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Spin } from 'antd';
+import { Table, Spin, Button } from 'antd';
 import moment from 'moment';
 import { CaretUpOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
@@ -98,15 +98,26 @@ class App extends Component {
     }
   }
 
+  prevPage = () => {
+    const { page = 0 } = this.props.data;
+    const nPage = page - 1;
+    window.open(`http://localhost:3000/${nPage || ''}`, '_self');
+  };
+  nextPage = () => {
+    const { page = 0 } = this.props.data;
+    window.open(`http://localhost:3000/${page + 1}`, '_self');
+  };
+
   render() {
     const { hideData, votesData } = this.state;
+    const { page = 0, nbPages = 0, hits = [] } = this.props.data;
     const columns = [
       {
         title: 'comments',
-        dataIndex: 'num_comments',
         width: '30px',
         key: 'comments',
         className: 'comments',
+        render: (data) => data.num_comments || 0,
       },
       {
         title: 'Vote Count',
@@ -134,13 +145,15 @@ class App extends Component {
           <div key={`news-${index}`} className="news-title-block">
             {(data.url && (
               <a href={data.url} target="_blank">
-                {data.title}
+                {data.title || 'No title'}
               </a>
-            )) || <span>{data.title}</span>}
-            <span className="createdOn">
-              | posted on: (
-              {moment(data.created_at).format('MMMM Do YYYY, h:mm:ss a')})
-            </span>
+            )) || <span>{data.title || 'No title'}</span>}
+            {data.created_at && (
+              <span className="createdOn">
+                | posted on: (
+                {moment(data.created_at).format('MMMM Do YYYY, h:mm:ss a')})
+              </span>
+            )}
             <div className="more-info-n-action">
               {data.author && (
                 <span className="author">by {data.author} |</span>
@@ -159,7 +172,7 @@ class App extends Component {
         ),
       },
     ];
-    let newsData = this.props.data && this.props.data.hits;
+    let newsData = hits;
     if (hideData && Object.keys(hideData).length) {
       newsData = newsData.filter((news) => {
         if (news && !hideData[news.objectID]) {
@@ -182,7 +195,18 @@ class App extends Component {
     return (
       <center>
         <div className="App">
-          {(hideData && votesData && (
+          <Table columns={columns} dataSource={newsData} pagination={false} />
+          <div className="custom-pagination">
+            <Button type="primary" onClick={this.prevPage} disabled={!page}>
+              Previous
+            </Button>
+            |
+            <Button type="primary" onClick={this.nextPage} disabled={!nbPages}>
+              Next
+            </Button>
+          </div>
+          <LineGraph data={GRAPH_DATA} />
+          {/* {(hideData && votesData && (
             <>
               <Table
                 columns={columns}
@@ -190,9 +214,8 @@ class App extends Component {
                 pagination={{ pageSize: 20 }}
               />
               <LineGraph data={GRAPH_DATA} />
-              <div style={{ textAlign: 'center', padding: '5px' }}>ID</div>
             </>
-          )) || <Spin tip="Loading..." />}
+          )) || <Spin tip="Loading..." />} */}
         </div>
       </center>
     );
