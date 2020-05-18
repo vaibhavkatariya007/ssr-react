@@ -2,6 +2,10 @@
   "name": "hacker-news-clone",
   "version": "0.1.0",
   "private": false,
+  "engines": {
+    "node": "10.14.2",
+    "npm": "6.4.1"
+  },
   "homepage": "./",
   "dependencies": {
     "@ant-design/icons": "^4.1.0",
@@ -32,9 +36,6 @@
     "redux-thunk": "^2.3.0",
     "url-loader": "^1.0.1"
   },
-  "engines": {
-    "node": "10.14.2"
-  },
   "resolutions": {
     "babel-core": "7.0.0-bridge.0"
   },
@@ -43,7 +44,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "serve": "npm run build && cross-env NODE_ENV=production node server/bootstrap.js"
+    "serve": "cross-env NODE_ENV=production node ./server/bootstrap.js"
   },
   "browserslist": [
     ">0.2%",
