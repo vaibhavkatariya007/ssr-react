@@ -5,7 +5,7 @@ import logo from '../../assets/logo.svg';
 const SITE_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : 'http://localhost:3000';
+    : 'https://ssr-hacker-news.herokuapp.com/';
 
 const FACEBOOK_APP_ID = 'XXXXXXXXX';
 
