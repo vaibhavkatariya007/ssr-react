@@ -13,7 +13,6 @@ const actionIndex = (req, res, next) => {
   const ID = URL && URL.substring(URL.lastIndexOf('/')).replace('/', '');
   const pageId = parseInt(ID);
   const store = configureStore();
-  //tags=front_page
   fetch(
     `https://hn.algolia.com/api/v1/search${
       pageId && pageId !== NaN ? '?page=' + pageId : '/'
@@ -28,19 +27,9 @@ const actionIndex = (req, res, next) => {
     })
     .catch((err) => console.log(err));
 };
-
-// root (/) should always serve our server rendered page
 router.use('^/$', actionIndex);
-// other static resources should just be served as they are
-router.use(
-  express.static(path.resolve(__dirname, '..', '..', 'build'), {
-    maxAge: '30d',
-  })
-);
-
+router.use(express.static(path.resolve(__dirname, '../../build')));
 router.get('/:id', actionIndex);
-
-// any other route should be handled by react-router, so serve the index page
 router.use('*', actionIndex);
 
 export default router;

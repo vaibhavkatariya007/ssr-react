@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Loadable from 'react-loadable';
 import { Table, Spin, Button } from 'antd';
-import moment from 'moment';
 import { CaretUpOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -12,8 +11,13 @@ import { setNewsData } from './store/appReducer';
 
 const AsyncGraph = Loadable({
   loader: () => import(/* webpackChunkName: "graph" */ './core/Graph/index'),
-  loading: () => <div>loading...</div>,
+  loading: () => <Spin tip="Loading..." />,
   modules: ['graph'],
+});
+const NewsItem = Loadable({
+  loader: () => import(/* webpackChunkName: "newsitem" */ './core/News/index'),
+  loading: () => <Spin tip="Loading..." />,
+  modules: ['newsitem'],
 });
 
 const TIMELINE_DATA = {
@@ -165,35 +169,7 @@ class App extends Component {
       {
         title: 'New Details',
         key: 'news_details',
-        render: (data, index) => (
-          <div key={`news-${index}`} className="news-title-block">
-            {(data.url && (
-              <a href={data.url} target="_blank">
-                {data.title || 'No title'}
-              </a>
-            )) || <span>{data.title || 'No title'}</span>}
-            {data.created_at && (
-              <span className="createdOn">
-                | posted on: (
-                {moment(data.created_at).format('MMMM Do YYYY, h:mm:ss a')})
-              </span>
-            )}
-            <div className="more-info-n-action">
-              {data.author && (
-                <span className="author">by {data.author} |</span>
-              )}
-              {data.points && (
-                <span className="points">{data.points} points | </span>
-              )}
-              <span
-                onClick={() => this.hideNews(data.objectID)}
-                className="hide-action"
-              >
-                [ hide ]
-              </span>
-            </div>
-          </div>
-        ),
+        render: (data) => <NewsItem data={data} hideNews={this.hideNews} />,
       },
     ];
     let newsData = hits;
@@ -217,9 +193,12 @@ class App extends Component {
     const GRAPH_DATA = calculateTimeLineData(newsData, votesData);
 
     return (
-      <Page>
+      <Page {...this.props}>
         <center>
-          <div className="app">
+          <header>
+            <h1 onClick={() => this.getData(null)}>Hacker News</h1>
+          </header>
+          <main className="app">
             <Table columns={columns} dataSource={newsData} pagination={false} />
             <div className="custom-pagination">
               <Button type="primary" onClick={this.prevPage} disabled={!page}>
@@ -245,7 +224,7 @@ class App extends Component {
               <LineGraph data={GRAPH_DATA} />
             </>
           )) || <Spin tip="Loading..." />} */}
-          </div>
+          </main>
         </center>
       </Page>
     );

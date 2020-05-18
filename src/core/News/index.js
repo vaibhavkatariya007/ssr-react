@@ -1,0 +1,36 @@
+import React from 'react';
+import moment from 'moment';
+
+const NewsItem = ({
+  data: {
+    objectID,
+    url = null,
+    title = 'No title',
+    created_at,
+    author,
+    points,
+  } = {},
+  hideNews,
+}) => (
+  <div className="news-title-block">
+    {(url && (
+      <a rel="noopener" href={url} target="_blank">
+        {title}
+      </a>
+    )) || <span>{title}</span>}
+    {created_at && (
+      <span className="createdOn">
+        | posted on: ({moment(created_at).format('MMMM Do YYYY, h:mm:ss a')})
+      </span>
+    )}
+    <div className="more-info-n-action">
+      {author && <span className="author">by {author} |</span>}
+      {points && <span className="points">{points} points | </span>}
+      <span onClick={() => hideNews(objectID)} className="hide-action">
+        [ hide ]
+      </span>
+    </div>
+  </div>
+);
+
+export default NewsItem;

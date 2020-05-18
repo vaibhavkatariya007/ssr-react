@@ -5,7 +5,7 @@ import logo from '../../assets/logo.svg';
 const SITE_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : 'https://cra-ssr.herokuapp.com';
+    : 'http://localhost:3000';
 
 const FACEBOOK_APP_ID = 'XXXXXXXXX';
 
@@ -80,10 +80,10 @@ class Page extends Component {
   }
 
   render() {
-    const { children, id, className, location = {}, ...rest } = this.props;
+    const { children, className, location = {}, ...rest } = this.props;
 
     return (
-      <div id={id} className={className}>
+      <div className={className}>
         <Helmet
           htmlAttributes={{
             lang: 'en',

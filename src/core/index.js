@@ -1,3 +1,4 @@
 import Page from './Page';
 import Graph from './Graph';
-export { Page, Graph };
+import NewsItem from './News';
+export { Page, Graph, NewsItem };
