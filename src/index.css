@@ -118,7 +118,8 @@ span.hide-action {
 }
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-  .app {
+  .app,
+  header {
     width: 100%;
   }
   .news-title-block,
