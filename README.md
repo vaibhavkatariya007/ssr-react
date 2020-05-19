@@ -1,4 +1,8 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App & Express Server].
+
+### Visit following link
+
+https://ssr-hacker-news.herokuapp.com/
 
 ## Available Scripts
 
@@ -26,5 +30,3 @@ Chart.js used for votes graph.
 
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### Deployment Steps For Heroku Server
