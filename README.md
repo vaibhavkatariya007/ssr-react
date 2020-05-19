@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App & Express Server].
+This project is bootstrapped with [Create React App & Express Server]. Try to Use hacker news API 
 
 ## Visit following link
 
