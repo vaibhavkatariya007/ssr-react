@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 // import { Spin } from 'antd';
 // import Loadable from 'react-loadable';
 import { Route, Switch } from 'react-router-dom';
@@ -15,15 +15,11 @@ import App from './App';
 //   modules: ['app'],
 // });
 
-class ServerApp extends Component {
-  render() {
-    return (
-      <Switch>
-        <Route path="/" exact component={App} />
-        <Route path="/:id" component={App} />
-      </Switch>
-    );
-  }
-}
+const ServerApp = () => (
+  <Switch>
+    <Route path="/" exact component={App} />
+    <Route path="/:id" component={App} />
+  </Switch>
+);
 
 export default ServerApp;

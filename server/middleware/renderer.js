@@ -44,7 +44,7 @@ export default (store) => (req, res, next) => {
 
     const reduxState = JSON.stringify(store.getState());
     const extraChunks = extractAssets(manifest, modules).map((chunk) => {
-      return `<script type="text/javascript" src="/${chunk}"></script>`;
+      return `<script defer type="text/javascript" src="/${chunk}"></script>`;
     });
 
     const helmet = Helmet.renderStatic();
