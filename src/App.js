@@ -10,14 +10,20 @@ import { Page } from './core';
 import { setNewsData } from './store/appReducer';
 
 const AsyncGraph = Loadable({
-  loader: () => import(/* webpackChunkName: "graph" */ './core/Graph/index'),
+  loader: () => import(/* webpackChunkName: "graph" */ './core/Graph/'),
   loading: () => <Spin tip="Loading..." />,
   modules: ['graph'],
 });
-const NewsItem = Loadable({
-  loader: () => import(/* webpackChunkName: "newsitem" */ './core/News/index'),
+const AsyncNewsItem = Loadable({
+  loader: () => import(/* webpackChunkName: "newsitem" */ './core/News/'),
   loading: () => <Spin tip="Loading..." />,
   modules: ['newsitem'],
+});
+const AsyncNavigation = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "navigation" */ './core/Navigation/'),
+  loading: () => <Spin tip="Loading..." />,
+  modules: ['navigation'],
 });
 
 const TIMELINE_DATA = {
@@ -138,7 +144,7 @@ class App extends Component {
 
   render() {
     const { hideData, votesData } = this.state;
-    const { data: { page = 0, nbPages = 0, hits = [] } = {} } = this.props;
+    const { data = {}, data: { hits = [] } = {} } = this.props;
     const columns = [
       {
         title: 'comments',
@@ -169,7 +175,9 @@ class App extends Component {
       {
         title: 'New Details',
         key: 'news_details',
-        render: (data) => <NewsItem data={data} hideNews={this.hideNews} />,
+        render: (data) => (
+          <AsyncNewsItem data={data} hideNews={this.hideNews} />
+        ),
       },
     ];
     let newsData = hits;
@@ -200,19 +208,11 @@ class App extends Component {
           </header>
           <main className="app">
             <Table columns={columns} dataSource={newsData} pagination={false} />
-            <div className="custom-pagination">
-              <Button type="primary" onClick={this.prevPage} disabled={!page}>
-                Previous
-              </Button>
-              |
-              <Button
-                type="primary"
-                onClick={this.nextPage}
-                disabled={!nbPages}
-              >
-                Next
-              </Button>
-            </div>
+            <AsyncNavigation
+              prevPage={this.prevPage}
+              nextPage={this.nextPage}
+              {...data}
+            />
             <AsyncGraph data={GRAPH_DATA} />
             {/* {(hideData && votesData && (
             <>

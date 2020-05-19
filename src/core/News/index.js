@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const NewsItem = ({
   data: {
@@ -14,13 +14,13 @@ const NewsItem = ({
 }) => (
   <div className="news-title-block">
     {(url && (
-      <a rel="noopener" href={url} target="_blank">
+      <a rel="noopene noreferrer" href={url} target="_blank">
         {title}
       </a>
     )) || <span>{title}</span>}
     {created_at && (
       <span className="createdOn">
-        | posted on: ({moment(created_at).format('MMMM Do YYYY, h:mm:ss a')})
+        | posted on: ({dayjs(created_at).format('MMMM D YYYY, h:mm:ss a')})
       </span>
     )}
     <div className="more-info-n-action">
