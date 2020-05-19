@@ -1,0 +1,593 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing News Component News component have all elements 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <NewsItem
+    data={
+      Object {
+        "author": "vaibhav katariya",
+        "created_at": "2020-05-19",
+        "objectID": 123,
+        "points": 22,
+        "title": "No title",
+        "url": "http//ssr-hacker-news.com/",
+      }
+    }
+    hideNews={[MockFunction]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <a
+          href="http//ssr-hacker-news.com/"
+          rel="noopene noreferrer"
+          target="_blank"
+        >
+          No title
+        </a>,
+        <span
+          className="createdOn"
+        >
+          | posted on: (
+          May 19 2020, 12:00:00 am
+          )
+        </span>,
+        <div
+          className="more-info-n-action"
+        >
+          <span
+            className="author"
+          >
+            by 
+            vaibhav katariya
+             |
+          </span>
+          <span
+            className="points"
+          >
+            22
+             points | 
+          </span>
+          <span
+            className=""
+            onClick={[Function]}
+          >
+            [ hide ]
+          </span>
+        </div>,
+      ],
+      "className": "news-title-block",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "No title",
+          "href": "http//ssr-hacker-news.com/",
+          "rel": "noopene noreferrer",
+          "target": "_blank",
+        },
+        "ref": null,
+        "rendered": "No title",
+        "type": "a",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "| posted on: (",
+            "May 19 2020, 12:00:00 am",
+            ")",
+          ],
+          "className": "createdOn",
+        },
+        "ref": null,
+        "rendered": Array [
+          "| posted on: (",
+          "May 19 2020, 12:00:00 am",
+          ")",
+        ],
+        "type": "span",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <span
+              className="author"
+            >
+              by 
+              vaibhav katariya
+               |
+            </span>,
+            <span
+              className="points"
+            >
+              22
+               points | 
+            </span>,
+            <span
+              className=""
+              onClick={[Function]}
+            >
+              [ hide ]
+            </span>,
+          ],
+          "className": "more-info-n-action",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                "by ",
+                "vaibhav katariya",
+                " |",
+              ],
+              "className": "author",
+            },
+            "ref": null,
+            "rendered": Array [
+              "by ",
+              "vaibhav katariya",
+              " |",
+            ],
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                22,
+                " points | ",
+              ],
+              "className": "points",
+            },
+            "ref": null,
+            "rendered": Array [
+              22,
+              " points | ",
+            ],
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "[ hide ]",
+              "className": "",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": "[ hide ]",
+            "type": "span",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <a
+            href="http//ssr-hacker-news.com/"
+            rel="noopene noreferrer"
+            target="_blank"
+          >
+            No title
+          </a>,
+          <span
+            className="createdOn"
+          >
+            | posted on: (
+            May 19 2020, 12:00:00 am
+            )
+          </span>,
+          <div
+            className="more-info-n-action"
+          >
+            <span
+              className="author"
+            >
+              by 
+              vaibhav katariya
+               |
+            </span>
+            <span
+              className="points"
+            >
+              22
+               points | 
+            </span>
+            <span
+              className=""
+              onClick={[Function]}
+            >
+              [ hide ]
+            </span>
+          </div>,
+        ],
+        "className": "news-title-block",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "No title",
+            "href": "http//ssr-hacker-news.com/",
+            "rel": "noopene noreferrer",
+            "target": "_blank",
+          },
+          "ref": null,
+          "rendered": "No title",
+          "type": "a",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "| posted on: (",
+              "May 19 2020, 12:00:00 am",
+              ")",
+            ],
+            "className": "createdOn",
+          },
+          "ref": null,
+          "rendered": Array [
+            "| posted on: (",
+            "May 19 2020, 12:00:00 am",
+            ")",
+          ],
+          "type": "span",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <span
+                className="author"
+              >
+                by 
+                vaibhav katariya
+                 |
+              </span>,
+              <span
+                className="points"
+              >
+                22
+                 points | 
+              </span>,
+              <span
+                className=""
+                onClick={[Function]}
+              >
+                [ hide ]
+              </span>,
+            ],
+            "className": "more-info-n-action",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  "by ",
+                  "vaibhav katariya",
+                  " |",
+                ],
+                "className": "author",
+              },
+              "ref": null,
+              "rendered": Array [
+                "by ",
+                "vaibhav katariya",
+                " |",
+              ],
+              "type": "span",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  22,
+                  " points | ",
+                ],
+                "className": "points",
+              },
+              "ref": null,
+              "rendered": Array [
+                22,
+                " points | ",
+              ],
+              "type": "span",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "[ hide ]",
+                "className": "",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": "[ hide ]",
+              "type": "span",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    Symbol(enzyme.__providerValues__): undefined,
+  },
+  Symbol(enzyme.__providerValues__): Map {},
+}
+`;
+
+exports[`Testing News Component News item should render correctly 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <NewsItem />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <span>
+          No title
+        </span>,
+        undefined,
+        <div
+          className="more-info-n-action"
+        >
+          <span
+            className=""
+            onClick={[Function]}
+          >
+            [ hide ]
+          </span>
+        </div>,
+      ],
+      "className": "news-title-block",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "No title",
+        },
+        "ref": null,
+        "rendered": "No title",
+        "type": "span",
+      },
+      undefined,
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            undefined,
+            undefined,
+            <span
+              className=""
+              onClick={[Function]}
+            >
+              [ hide ]
+            </span>,
+          ],
+          "className": "more-info-n-action",
+        },
+        "ref": null,
+        "rendered": Array [
+          undefined,
+          undefined,
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "[ hide ]",
+              "className": "",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": "[ hide ]",
+            "type": "span",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <span>
+            No title
+          </span>,
+          undefined,
+          <div
+            className="more-info-n-action"
+          >
+            <span
+              className=""
+              onClick={[Function]}
+            >
+              [ hide ]
+            </span>
+          </div>,
+        ],
+        "className": "news-title-block",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "No title",
+          },
+          "ref": null,
+          "rendered": "No title",
+          "type": "span",
+        },
+        undefined,
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              undefined,
+              undefined,
+              <span
+                className=""
+                onClick={[Function]}
+              >
+                [ hide ]
+              </span>,
+            ],
+            "className": "more-info-n-action",
+          },
+          "ref": null,
+          "rendered": Array [
+            undefined,
+            undefined,
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "[ hide ]",
+                "className": "",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": "[ hide ]",
+              "type": "span",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    Symbol(enzyme.__providerValues__): undefined,
+  },
+  Symbol(enzyme.__providerValues__): Map {},
+}
+`;

@@ -232,13 +232,11 @@ class App extends Component {
   }
 }
 
-export default withRouter(
-  connect(
-    ({ app }) => ({
-      data: app.newsData,
-    }),
-    (dispatch) => ({
-      updateNews: (data) => dispatch(setNewsData(data)),
-    })
-  )(App)
-);
+export default connect(
+  ({ app }) => ({
+    data: app.newsData,
+  }),
+  (dispatch) => ({
+    updateNews: (data) => dispatch(setNewsData(data)),
+  })
+)(App);

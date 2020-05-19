@@ -26,7 +26,7 @@ const NewsItem = ({
     <div className="more-info-n-action">
       {author && <span className="author">by {author} |</span>}
       {points && <span className="points">{points} points | </span>}
-      <span onClick={() => hideNews(objectID)} className="hide-action">
+      <span onClick={() => hideNews(objectID)} className="">
         [ hide ]
       </span>
     </div>
