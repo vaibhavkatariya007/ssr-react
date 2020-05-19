@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import Loadable from 'react-loadable';
-import { Table, Spin, Button } from 'antd';
+import { Table, Spin } from 'antd';
 import { CaretUpOutlined } from '@ant-design/icons';
 
 import { Page } from './core';
 
 import { setNewsData } from './store/appReducer';
 
+// Async loading of components
 const AsyncGraph = Loadable({
   loader: () => import(/* webpackChunkName: "graph" */ './core/Graph/'),
   loading: () => <Spin tip="Loading..." />,
