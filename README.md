@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App & Express Server].
 
-### Visit following link
+## Visit following link
 
 https://ssr-hacker-news.herokuapp.com/
 
