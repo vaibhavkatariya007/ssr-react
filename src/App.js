@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 import Loadable from 'react-loadable';
 import { Table, Spin, Button } from 'antd';
 import { CaretUpOutlined } from '@ant-design/icons';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 
 import { Page } from './core';
 

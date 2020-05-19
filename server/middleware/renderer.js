@@ -2,8 +2,8 @@ import path from 'path';
 import fs from 'fs';
 
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import Loadable from 'react-loadable';
+import { renderToString } from 'react-dom/server';
+import { Capture } from 'react-loadable';
 import { Provider as ReduxProvider } from 'react-redux';
 import { StaticRouter } from 'react-router';
 import { Helmet } from 'react-helmet';
@@ -32,19 +32,19 @@ export default (store) => (req, res, next) => {
     const modules = [];
     const context = {};
 
-    const markUp = ReactDOMServer.renderToString(
-      <Loadable.Capture report={(m) => modules.push(m)}>
+    const markUp = renderToString(
+      <Capture report={(m) => modules.push(m)}>
         <ReduxProvider store={store}>
           <StaticRouter location={req.url} context={context}>
             <ServerApp />
           </StaticRouter>
         </ReduxProvider>
-      </Loadable.Capture>
+      </Capture>
     );
 
     const reduxState = JSON.stringify(store.getState());
     const extraChunks = extractAssets(manifest, modules).map((chunk) => {
-      return `<script defer type="text/javascript" src="/${chunk}"></script>`;
+      return `<script type="text/javascript" src="/${chunk}"></script>`;
     });
 
     const helmet = Helmet.renderStatic();
