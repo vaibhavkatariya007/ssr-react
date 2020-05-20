@@ -43,7 +43,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "test:verbose": "jest --verbose",
     "eject": "react-scripts eject",
     "serve": "cross-env NODE_ENV=production node ./server/bootstrap.js"
   },

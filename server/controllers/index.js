@@ -8,6 +8,16 @@ import { setNewsData } from '../../src/store/appReducer';
 const router = express.Router();
 const path = require('path');
 
+const NotFoundMarkUp = `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Not Found</title>
+  </head>
+  <body>
+    <h1>Page Not Found</h1>
+  </body>
+</html>`;
+
 const actionIndex = (req, res, next) => {
   let URL = req.headers.referer || req.params.id;
   const ID = URL && URL.substring(URL.lastIndexOf('/')).replace('/', '');
@@ -30,17 +40,6 @@ const actionIndex = (req, res, next) => {
 router.use('^/$', actionIndex);
 router.use(express.static(path.resolve(__dirname, '../../build')));
 router.get('/:id', actionIndex);
-router.use('*', (req, res, next) =>
-  res.send(`<!DOCTYPE html>
-<html>
-  <head>
-    <title>Not Found</title>
-  </head>
-  <body>
-    <h1>Page Not Found</h1>
-  </body>
-</html>
-`)
-);
+router.use('*', (req, res, next) => res.send(NotFoundMarkUp));
 
 export default router;

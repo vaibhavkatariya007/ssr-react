@@ -1,4 +1,4 @@
-This project is bootstrapped with [Create React App & Express Server]. Try to Use hacker news API 
+This application is bootstrapped with [Create React App & Express Server].
 
 ## Visit following link
 
@@ -22,11 +22,11 @@ Our server is listening on port : 3000 [http://localhost:3000]
 
 ## Tools and library used
 
-Express server is used for serving react application.<br/>
-Ant design used for UI. <br/>
-Chart.js used for votes graph.
+Express is used for serving react application via express server.<br/>
+Ant design is used for UI. <br/>
+Chart.js/react-charts is used for line graph.
+Enzyme is used for testing the components.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To run the test cases, which will test the existence and correct rendering of the components.
